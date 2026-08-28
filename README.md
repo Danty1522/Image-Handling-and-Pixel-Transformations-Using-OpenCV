@@ -7,345 +7,326 @@
 
 **Register Number:** 212224040054
 
-## AIM:
-Write a Python program using OpenCV that performs the following tasks:
 
-1) Read and Display an Image.  
-2) Adjust the brightness of an image.  
-3) Modify the image contrast.  
-4) Generate a third image using bitwise operations.
+## AIM
+Write a Python program using OpenCV to perform basic image processing operations including:
 
-## Software Required:
-- Anaconda - Python 3.7
-- Jupyter Notebook (for interactive development and execution)
+- Read and display an image.
+- Draw basic shapes and text.
+- Perform color space conversions.
+- Access and modify pixel values.
+- Resize and crop an image.
+- Flip an image horizontally and vertically.
 
-## Algorithm:
-### Step 1:
-Load an image from your local directory and display it.
+---
 
-### Step 2:
-Create a matrix of ones (with data type float64) to adjust brightness.
+## Software Required
+- Anaconda (Python 3.7 or above)
+- Jupyter Notebook
+- OpenCV (`cv2`)
+- Matplotlib
 
-### Step 3:
-Create brighter and darker images by adding and subtracting the matrix from the original image.  
-Display the original, brighter, and darker images.
+---
 
-### Step 4:
-Modify the image contrast by creating two higher contrast images using scaling factors of 1.1 and 1.2 (without overflow fix).  
-Display the original, lower contrast, and higher contrast images.
+## Algorithm
 
-### Step 5:
-Split the image (boy.jpg) into B, G, R components and display the channels.
+### Step 1
+Import the required libraries (`cv2`, `matplotlib.pyplot`).
 
-## Program Developed By:
-- **Name:** VENKATANATHAN P R
-- **Register Number:** 212223240173
+### Step 2
+Read the image from the local directory and display it.
 
-### Ex. No. 01
+### Step 3
+Draw graphical objects such as:
+- Line
+- Circle
+- Rectangle
+- Text
 
-#### 1. Read the image ('city.jpg') using OpenCV imread() as a grayscale image.
+### Step 4
+Convert the image into different color spaces:
+- RGB
+- HSV
+- Grayscale
+- YCrCb
+
+### Step 5
+Modify pixel values by changing a selected region.
+
+### Step 6
+Resize the image.
+
+### Step 7
+Crop a Region of Interest (ROI).
+
+### Step 8
+Flip the image horizontally and vertically.
+
+---
+
+# Ex. No. 01
+
+## 1. Import the required libraries.
+
 ```python
 import cv2
-import numpy as np
 import matplotlib.pyplot as plt
-
-img = cv2.imread("city.jpg", cv2.IMREAD_GRAYSCALE)
 ```
 
-#### 2. Print the image width, height & Channel.
-```python
-height, width = img.shape
+---
 
-print("Width :", width)
-print("Height:", height)
-print("Channel: 1")
+## 2. Read the image.
+
+```python
+img = cv2.imread("monty.jpeg")
+img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 ```
 
-#### 3. Display the image using matplotlib imshow().
+## 3. Display the image.
+
 ```python
-plt.imshow(img, cmap="gray")
-plt.title("Grayscale Image")
+plt.imshow(img)
 plt.axis("off")
 plt.show()
 ```
 
-#### 4. Save the image as a PNG file using OpenCV imwrite().
+### Output
+
+<img width="466" height="496" alt="image" src="https://github.com/user-attachments/assets/c74ed598-6fa1-42d9-9903-31cf524050d9" />
+
+
+---
+
+## 4. Draw a diagonal line.
+
 ```python
-cv2.imwrite("city.png", img)
-print("Image saved successfully.")
-```
+cv2.line(img, (0,0), (500,500), (255,0,0), 5)
 
-#### 5. Read the saved image above as a color image using cv2.cvtColor().
-```python
-img_gray = cv2.imread("city.png", cv2.IMREAD_GRAYSCALE)
-img_color = cv2.cvtColor(img_gray, cv2.COLOR_GRAY2RGB)
-```
-
-#### 6. Display the Colour image using matplotlib imshow() & Print the image width, height & channel.
-```python
-plt.imshow(img_color)
-plt.title("Colour Image")
-plt.axis("off")
-plt.show()
-
-height, width, channel = img_color.shape
-
-print("Width :", width)
-print("Height:", height)
-print("Channel:", channel)
-```
-
-#### 7. Crop the image to extract any specific object from the image.
-```python
-cropped = img_color[150:450, 200:500]
-
-plt.imshow(cropped)
-plt.title("Cropped Image")
+plt.imshow(img)
 plt.axis("off")
 plt.show()
 ```
 
-#### 8. Resize the image up by a factor of 2x.
+### Output
+
+<img width="415" height="516" alt="image" src="https://github.com/user-attachments/assets/3a9da2b0-5619-4024-b7b4-3d20e86df02e" />
+
+
+---
+
+## 5. Draw a circle.
+
 ```python
-resized = cv2.resize(
-    img_color,
-    None,
-    fx=2,
-    fy=2,
-    interpolation=cv2.INTER_LINEAR
+cv2.circle(img, (350,250), 80, (0,255,0), 5)
+
+plt.imshow(img)
+plt.axis("off")
+plt.show()
+```
+
+### Output
+
+<img width="420" height="515" alt="image" src="https://github.com/user-attachments/assets/c9733f54-e63b-49d5-90b7-f57f1cc8a113" />
+
+
+---
+
+## 6. Draw a rectangle.
+
+```python
+cv2.rectangle(img, (80,100), (280,320), (255,255,0), 4)
+
+plt.imshow(img)
+plt.axis("off")
+plt.show()
+```
+
+### Output
+
+<img width="427" height="502" alt="image" src="https://github.com/user-attachments/assets/8eeb3e56-014c-430f-b130-76f5dbfa3e31" />
+
+
+---
+
+## 7. Add text to the image.
+
+```python
+cv2.putText(
+    img,
+    "monty",
+    (50,50),
+    cv2.FONT_HERSHEY_SIMPLEX,
+    1,
+    (255,0,255),
+    2
 )
+
+plt.imshow(img)
+plt.axis("off")
+plt.show()
+```
+
+### Output
+
+<img width="411" height="502" alt="image" src="https://github.com/user-attachments/assets/838b6b2e-66e0-4080-ba1c-98d4c903022a" />
+
+
+---
+
+## 8. Convert the image to HSV.
+
+```python
+hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
+
+plt.imshow(hsv)
+plt.axis("off")
+plt.show()
+```
+
+### Output
+
+<img width="452" height="510" alt="image" src="https://github.com/user-attachments/assets/5904392e-e223-4361-a4c6-cb69584482fd" />
+
+
+---
+
+## 9. Convert the image to Grayscale.
+
+```python
+gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+
+plt.imshow(gray, cmap="gray")
+plt.axis("off")
+plt.show()
+```
+
+### Output
+
+<img width="426" height="507" alt="image" src="https://github.com/user-attachments/assets/029ca800-8633-4308-b24b-30df4f62281a" />
+
+
+---
+
+## 10. Convert the image to YCrCb.
+
+```python
+ycrcb = cv2.cvtColor(img, cv2.COLOR_RGB2YCrCb)
+
+plt.imshow(ycrcb)
+plt.axis("off")
+plt.show()
+```
+
+### Output
+
+<img width="418" height="505" alt="image" src="https://github.com/user-attachments/assets/e2861709-34f3-4a2d-a2d1-afefd218ae8c" />
+
+
+---
+
+## 11. Convert HSV back to RGB.
+
+```python
+rgb = cv2.cvtColor(hsv, cv2.COLOR_HSV2RGB)
+
+plt.imshow(rgb)
+plt.axis("off")
+plt.show()
+```
+
+### Output
+<img width="422" height="508" alt="image" src="https://github.com/user-attachments/assets/e4e7229c-4f32-47cb-be1e-98e7f2657b9a" />
+
+
+---
+
+## 12. Access and modify pixel values.
+
+```python
+modified = img.copy()
+
+modified[100:180,100:180] = [255,255,255]
+
+plt.imshow(modified)
+plt.axis("off")
+plt.show()
+```
+
+### Output
+
+<img width="412" height="508" alt="image" src="https://github.com/user-attachments/assets/25b0e594-932e-4911-aa77-bf4f7df25492" />
+
+
+---
+
+## 13. Resize the image.
+
+```python
+resized = cv2.resize(img, None, fx=0.5, fy=0.5)
 
 plt.imshow(resized)
-plt.title("Resized Image (2x)")
 plt.axis("off")
 plt.show()
 ```
 
-#### 9. Flip the cropped/resized image horizontally.
-```python
-flipped = cv2.flip(cropped, 1)
+### Output
 
-plt.imshow(flipped)
-plt.title("Horizontally Flipped Image")
+<img width="582" height="512" alt="image" src="https://github.com/user-attachments/assets/c744594e-61d4-4350-94ca-c1ae601528a8" />
+
+
+---
+
+## 14. Crop the image.
+
+```python
+crop = img[100:450,100:400]
+
+plt.imshow(crop)
 plt.axis("off")
 plt.show()
 ```
 
-#### 10. Read in the image ('city.jpg').
+### Output
+
+<img width="520" height="513" alt="image" src="https://github.com/user-attachments/assets/54f84f25-cf18-4487-ae45-beb854d1f548" />
+
+
+---
+
+## 15. Flip the image horizontally.
+
 ```python
-img = cv2.imread("city.jpg")
-img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-```
+horizontal = cv2.flip(img, 1)
 
-#### 11. Add the following text to the dark area at the bottom of the image (centered on the image).
-```python
-text = "Smart City View"
-font_face = cv2.FONT_HERSHEY_PLAIN
-
-text_position = (180, img_rgb.shape[0] - 20)
-
-cv2.putText(
-    img_rgb,
-    text,
-    text_position,
-    font_face,
-    2,
-    (255, 255, 255),
-    2,
-    cv2.LINE_AA
-)
-```
-
-#### 12. Draw a magenta rectangle that encompasses any prominent object in the image.
-```python
-rect_color = (255, 0, 255)
-
-cv2.rectangle(
-    img_rgb,
-    (250, 180),
-    (500, 450),
-    rect_color,
-    3
-)
-```
-
-#### 13. Display the final annotated image.
-```python
-plt.imshow(img_rgb)
-plt.title("Annotated City Image")
+plt.imshow(horizontal)
 plt.axis("off")
 plt.show()
 ```
 
-#### 14. Read the image ('city.jpg').
+### Output
+
+<img width="415" height="501" alt="image" src="https://github.com/user-attachments/assets/6897f842-6325-4615-91d7-d608fa4ffdcd" />
+
+
+---
+
+## 16. Flip the image vertically.
+
 ```python
-img = cv2.imread("city.jpg")
-img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-```
+vertical = cv2.flip(img, 0)
 
-#### 15. Adjust the brightness of the image.
-```python
-# Create a matrix of ones (with data type float64)
-
-matrix = np.ones(img.shape, dtype="uint8") * 50
-```
-
-#### 16. Create brighter and darker images.
-```python
-img_brighter = cv2.add(img, matrix)
-img_darker = cv2.subtract(img, matrix)
-```
-
-#### 17. Display the images (Original Image, Darker Image, Brighter Image).
-```python
-plt.figure(figsize=(15,5))
-
-plt.subplot(1,3,1)
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-plt.title("Original Image")
-plt.axis("off")
-
-plt.subplot(1,3,2)
-plt.imshow(cv2.cvtColor(img_darker, cv2.COLOR_BGR2RGB))
-plt.title("Darker Image")
-plt.axis("off")
-
-plt.subplot(1,3,3)
-plt.imshow(cv2.cvtColor(img_brighter, cv2.COLOR_BGR2RGB))
-plt.title("Brighter Image")
-plt.axis("off")
-
-plt.show()
-```
-
-#### 18. Modify the image contrast.
-```python
-# Create two higher contrast images using the 'scale' option
-# with factors of 1.1 and 1.2 (without overflow fix)
-
-img_higher1 = cv2.convertScaleAbs(img, alpha=1.1, beta=0)
-img_higher2 = cv2.convertScaleAbs(img, alpha=1.2, beta=0)
-```
-
-#### 19. Display the images (Original, Lower Contrast, Higher Contrast).
-```python
-plt.figure(figsize=(15,5))
-
-plt.subplot(1,3,1)
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-plt.title("Original")
-plt.axis("off")
-
-plt.subplot(1,3,2)
-plt.imshow(cv2.cvtColor(img_higher1, cv2.COLOR_BGR2RGB))
-plt.title("Contrast 1.1")
-plt.axis("off")
-
-plt.subplot(1,3,3)
-plt.imshow(cv2.cvtColor(img_higher2, cv2.COLOR_BGR2RGB))
-plt.title("Contrast 1.2")
-plt.axis("off")
-
-plt.show()
-```
-
-#### 20. Split the image into the B, G, R components & Display the channels.
-```python
-B, G, R = cv2.split(img)
-
-plt.figure(figsize=(12,4))
-
-plt.subplot(1,3,1)
-plt.imshow(B, cmap="gray")
-plt.title("Blue")
-
-plt.subplot(1,3,2)
-plt.imshow(G, cmap="gray")
-plt.title("Green")
-
-plt.subplot(1,3,3)
-plt.imshow(R, cmap="gray")
-plt.title("Red")
-
-plt.show()
-```
-
-#### 21. Merge the R, G, B displays along with the original image.
-```python
-merged_rgb = cv2.merge((R, G, B))
-
-plt.figure(figsize=(10,5))
-
-plt.subplot(1,2,1)
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-plt.title("Original")
-
-plt.subplot(1,2,2)
-plt.imshow(merged_rgb)
-plt.title("Merged RGB")
-
+plt.imshow(vertical)
 plt.axis("off")
 plt.show()
 ```
 
-#### 22. Split the image into the H, S, V components & Display the channels.
-```python
-hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+### Output
 
-H, S, V = cv2.split(hsv)
+<img width="422" height="511" alt="image" src="https://github.com/user-attachments/assets/841a2e23-ba03-4996-ba36-33bdd19526f3" />
 
-plt.figure(figsize=(12,4))
 
-plt.subplot(1,3,1)
-plt.imshow(H, cmap="gray")
-plt.title("Hue")
+---
 
-plt.subplot(1,3,2)
-plt.imshow(S, cmap="gray")
-plt.title("Saturation")
+# Result
 
-plt.subplot(1,3,3)
-plt.imshow(V, cmap="gray")
-plt.title("Value")
-
-plt.show()
-```
-
-#### 23. Merge the H, S, V displays along with the original image.
-```python
-merged_hsv = cv2.merge((H, S, V))
-merged_bgr = cv2.cvtColor(merged_hsv, cv2.COLOR_HSV2BGR)
-
-plt.figure(figsize=(10,5))
-
-plt.subplot(1,2,1)
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-plt.title("Original")
-
-plt.subplot(1,2,2)
-plt.imshow(cv2.cvtColor(merged_bgr, cv2.COLOR_BGR2RGB))
-plt.title("Merged HSV")
-
-plt.axis("off")
-plt.show()
-```
-
-## Output:
-- **i)** Read and Display an Image.
-<img width="765" height="473" alt="image" src="https://github.com/user-attachments/assets/dca1fddf-0e0f-4586-b830-30a8d925b4d3" />
-<img width="731" height="484" alt="image" src="https://github.com/user-attachments/assets/1f427ffe-5be7-4bc9-9105-cd996775cf99" />
-<img width="763" height="458" alt="image" src="https://github.com/user-attachments/assets/92269931-0bec-4cef-8fbe-864fb054de6f" />
-<img width="810" height="477" alt="image" src="https://github.com/user-attachments/assets/f178c699-467b-4fb1-82ea-098df190b864" />
-<img width="732" height="479" alt="image" src="https://github.com/user-attachments/assets/f1607baa-fed1-4fbf-bd62-7ccd577f376a" />
-<img width="889" height="474" alt="image" src="https://github.com/user-attachments/assets/663ff428-281f-4dde-9124-03514966c469" />
-<img width="776" height="485" alt="image" src="https://github.com/user-attachments/assets/ea10f5b9-507a-48b8-8c6a-c1f815be0dfe" />
-<img width="809" height="468" alt="image" src="https://github.com/user-attachments/assets/ee397d3d-9640-4d47-87c8-3ae39d3e002d" />
-<img width="769" height="459" alt="image" src="https://github.com/user-attachments/assets/d36c0e90-43f7-4522-928e-f7b402144dc4" />
-<img width="855" height="461" alt="image" src="https://github.com/user-attachments/assets/79742ea2-f483-4a61-ab92-4b21394f5542" />
-<img width="721" height="539" alt="image" src="https://github.com/user-attachments/assets/776df503-4ac7-4013-b112-2c3deed8ee10" />
-<img width="620" height="529" alt="image" src="https://github.com/user-attachments/assets/62976af3-1690-4bdd-b664-9e916d27600c" />
-<img width="769" height="476" alt="image" src="https://github.com/user-attachments/assets/9b9a8571-ae8d-42f0-9f2b-560ef8781203" />
-<img width="773" height="478" alt="image" src="https://github.com/user-attachments/assets/1690047b-c847-4981-9673-4908f11b54e3" />
-
-## Result:
-Thus, the image was read and displayed successfully. Brightness and contrast adjustments were performed, the BGR and HSV channels were split and merged successfully, and the required image processing operations were implemented using OpenCV.
+Thus, the image was successfully read, displayed, modified using various OpenCV drawing functions, converted into different color spaces, resized, cropped, and flipped successfully using Python and OpenCV.
